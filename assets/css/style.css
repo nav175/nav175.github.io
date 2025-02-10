@@ -48,3 +48,16 @@
     --z-tooltip: 10;
     --z-fixed: 100;
 }
+
+/*========== Responsive typography==========*/
+@media screen and (min-width: 1150px) {
+    :root {
+      --biggest-font-size: 5.5rem;
+      --big-font-size: 2.75rem;
+      --h1-font-size: 2.25rem;
+      --h2-font-size: 1.5rem;
+      --h3-font-size: 1.25rem;
+      --normal-font-size: 1.125rem;
+      --small-font-size: .875rem;
+    }
+  }
