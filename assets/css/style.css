@@ -435,25 +435,30 @@ img {
     width: 100%;
 }
 
-/* EXPERIENCE */
+/* EXPERIENCE / EDUCATION */
+.education__content,
 .experience__content {
     row-gap: 2rem;
 }
 
+.education__data
 .experience__data {
     row-gap: 1rem;
 }
 
+.education__institution,
 .experience__company {
     font-size: var(--h2-font-size);
     font-weight: var(--font-bold);
 }
 
+.education__field,
 .experience__profession {
     font-size: var(--h3-font-size);
     margin-bottom: .25rem;
 }
 
+.education__date,
 .experience__date {
     display: block;
     font-size: var(--small-font-size);
@@ -709,6 +714,7 @@ img {
         order: 1;
     }
 
+    .education__data,
     .experience__data {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -814,23 +820,28 @@ img {
         width: initial;
     }
 
+    .education__content,
     .experience__content {
         row-gap: 4rem;
     }
 
+    .education__data
     .experience__data {
         grid-template-columns: 320px 380px;
         column-gap: 11.5rem;
     }
 
+    .education__institution,
     .experience__company {
         font-size: var(--h1-font-size);
     }
 
+    .education__field
     .experience__profession {
         margin-bottom: .5rem;
     }
 
+    .education__date,
     .experience__date {
         font-size: var(--normal-font-size);
         margin-bottom: 1.5rem;
