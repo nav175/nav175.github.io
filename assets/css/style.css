@@ -487,7 +487,25 @@ img {
 }
 
 /*=============== PROJECTS ===============*/
-
+.projects {
+    background-color: var(--container-color);
+  }
+  
+  .projects__container {
+    row-gap: 2rem;
+  }
+  
+  .projects__icon {
+    display: block;
+    color: var(--first-color-light);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .projects__title {
+    font-size: var(--h3-font-size);
+    margin-bottom: .75rem;
+  }
 
 /*=============== CONTACT ===============*/
 
