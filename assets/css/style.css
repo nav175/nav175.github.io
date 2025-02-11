@@ -489,93 +489,161 @@ img {
 /*=============== PROJECTS ===============*/
 .projects {
     background-color: var(--container-color);
-  }
-  
-  .projects__container {
+}
+
+.projects__container {
     row-gap: 2rem;
-  }
-  
-  .projects__icon {
+}
+
+.projects__icon {
     display: block;
     color: var(--first-color-light);
     font-size: 2rem;
     margin-bottom: 1rem;
-  }
-  
-  .projects__title {
+}
+
+.projects__title {
     font-size: var(--h3-font-size);
     margin-bottom: .75rem;
-  }
+}
 
 /*=============== CONTACT ===============*/
 .contact__container {
     row-gap: 4rem;
-  }
-  
-  .contact__group,
-  .contact__form {
+}
+
+.contact__group,
+.contact__form {
     gap: 1rem;
-  }
-  
-  .contact__form {
+}
+
+.contact__form {
     position: relative;
-  }
-  
-  .contact__input {
+}
+
+.contact__input {
     padding: 1.25rem;
     background-color: var(--container-color);
     color: var(--title-color);
     font-weight: var(--font-semi-bold);
-  }
-  
-  .contact__input::placeholder {
+}
+
+.contact__input::placeholder {
     color: var(--text-color-light);
-  }
-  
-  .contact__area {
+}
+
+.contact__area {
     height: 10rem;
     resize: none;
-  }
-  
-  .contact__button {
+}
+
+.contact__button {
     margin-top: 1rem;
     cursor: pointer;
-  }
-  
-  .contact__social {
+}
+
+.contact__social {
     grid-template-columns: repeat(2, max-content);
     justify-content: center;
     column-gap: 3rem;
-  }
-  
-  .contact__social-link {
+}
+
+.contact__social-link {
     color: var(--title-color);
     display: inline-flex;
     column-gap: .25rem;
     align-items: center;
     transition: color .4s;
-  }
-  
-  .contact__social-link i {
+}
+
+.contact__social-link i {
     font-size: 1.5rem;
-  }
-  
-  .contact__social-link span {
+}
+
+.contact__social-link span {
     font-size: var(--small-font-size);
     font-weight: var(--font-semi-bold);
-  }
-  
-  .contact__social-link:hover {
+}
+
+.contact__social-link:hover {
     color: var(--first-color-light);
-  }
-  
-  .contact__message {
+}
+
+.contact__message {
     position: absolute;
     left: 0;
     bottom: -2rem;
     font-size: var(--small-font-size);
     font-weight: var(--font-semi-bold);
     color: var(--title-color);
-  }
+}
 
 /*=============== FOOTER ===============*/
+.footer {
+    background-color: var(--container-color);
+}
+
+.footer__container {
+    padding-block: 3rem 2rem;
+    row-gap: 3rem;
+}
+
+.footer__links {
+    display: flex;
+    justify-content: center;
+    column-gap: 2.5rem;
+}
+
+.footer__link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    transition: color .4s;
+}
+
+.footer__link:hover {
+    color: var(--first-color-light);
+}
+
+.footer__copy {
+    color: var(--title-color);
+    font-size: var(--small-font-size);
+    text-align: center;
+}
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar {
+    width: 0.6rem;
+    background-color: hsl(var(--hue), 20%, 20%);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--hue), 20%, 30%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--hue), 20%, 40%);
+}
+
+/*=============== SCROLL UP ===============*/
+.scrollup {
+    position: fixed;
+    right: 1rem;
+    bottom: -50%;
+    background-color: var(--container-color);
+    display: inline-flex;
+    padding: 6px;
+    color: var(--title-color);
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px hsla(var(--hue), 30%, 8%, .3);
+    z-index: var(--z-tooltip);
+    transition: bottom .4s, transform .4s;
+}
+
+.scrollup:hover {
+    transform: translateY(-.5rem);
+}
+
+/* Show Scroll Up */
+.show-scroll {
+    bottom: 3rem;
+}
