@@ -647,3 +647,15 @@ img {
 .show-scroll {
     bottom: 3rem;
 }
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 300px) {
+    .container {
+      margin-inline: 1rem;
+    }
+  
+    .skills__content {
+      grid-template-columns: repeat(2, max-content);
+    }
+  }
