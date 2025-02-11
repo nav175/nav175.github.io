@@ -52,94 +52,96 @@
 /*========== Responsive typography==========*/
 @media screen and (min-width: 1150px) {
     :root {
-      --biggest-font-size: 5.5rem;
-      --big-font-size: 2.75rem;
-      --h1-font-size: 2.25rem;
-      --h2-font-size: 1.5rem;
-      --h3-font-size: 1.25rem;
-      --normal-font-size: 1.125rem;
-      --small-font-size: .875rem;
+        --biggest-font-size: 5.5rem;
+        --big-font-size: 2.75rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1.125rem;
+        --small-font-size: .875rem;
     }
-  }
+}
 
-  /*=============== BASE ===============*/
+/*=============== BASE ===============*/
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body,
 input,
 textarea,
 button {
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
 }
 
 body {
-  background-color: var(--body-color);
-  color: var(--text-color);
+    background-color: var(--body-color);
+    color: var(--text-color);
 }
 
 input,
 button,
 textarea {
-  border: none;
-  outline: none;
+    border: none;
+    outline: none;
 }
 
-h1, h2, h3 {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
+h1,
+h2,
+h3 {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
 }
 
 p {
-  line-height: 130%;
+    line-height: 130%;
 }
 
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 img {
-  display: block;
-  max-width: 100%;
-  height: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
-  max-width: 1120px;
-  margin-inline: 1.5rem;
+    max-width: 1120px;
+    margin-inline: 1.5rem;
 }
 
 .grid {
-  display: grid;
-  gap: 1.5rem;
+    display: grid;
+    gap: 1.5rem;
 }
 
 .section {
-  padding-block: 5rem 2rem;
+    padding-block: 5rem 2rem;
 }
 
 .section__title {
-  text-align: center;
-  font-size: var(--h1-font-size);
-  font-weight: var(--font-bold);
-  margin-bottom: 2rem;
+    text-align: center;
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-bold);
+    margin-bottom: 2rem;
 }
 
 .main {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 /*=============== HEADER & NAV ===============*/
@@ -149,28 +151,28 @@ img {
 .home__container {
     row-gap: 2rem;
     padding-top: 1rem;
-  }
-  
-  .home__img {
+}
+
+.home__img {
     width: 220px;
     justify-self: center;
     mask-image: linear-gradient(to bottom, hsla(var(--hue), 40%, 16%) 60%, transparent 100%);
-  }
-  
-  .home__name {
+}
+
+.home__name {
     font-size: var(--biggest-font-size);
     font-weight: var(--font-bold);
     word-break: break-word;
     margin-bottom: 1rem;
-  }
-  
-  .home__profession {
+}
+
+.home__profession {
     position: relative;
     font-size: var(--big-font-size);
     color: var(--text-color);
-  }
-  
-  .home__profession::after {
+}
+
+.home__profession::after {
     content: '';
     position: absolute;
     left: 0;
@@ -178,9 +180,34 @@ img {
     width: 25px;
     height: 3px;
     background-color: var(--text-color);
-  }
+}
 
-  
+.home__scroll {
+    color: var(--title-color);
+    display: inline-flex;
+    column-gap: .5rem;
+    align-items: center;
+    justify-self: center;
+    margin-top: 3rem;
+}
+
+.home__scroll-box {
+    background-color: var(--first-color);
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    overflow: hidden;
+}
+
+.home__scroll-text {
+    font-weight: var(--font-semi-bold);
+}
+
+.home__scroll-box {
+    animation: scroll-down 3s infinite;
+}
 
 /*=============== BUTTON ===============*/
 
@@ -198,4 +225,3 @@ img {
 
 
 /*=============== FOOTER ===============*/
-
