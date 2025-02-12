@@ -39,37 +39,69 @@ window.addEventListener('scroll', blurHeader)
 
 /*=============== EMAIL JS ===============*/
 const contactForm = document.getElementById('contact-form'),
-      contactMessage = document.getElementById('contact-message');
+      contactMessage = document.getElementById('contact-message'),
+      nameInput = document.querySelector("input[name='user_name']"),
+      emailInput = document.querySelector("input[name='user_email']"),
+      messageInput = document.querySelector("textarea[name='user_message']");
 
 const sendEmail = (e) => {
     e.preventDefault();
 
-    // serviceID - templateID - #form - publicKey
+    // Trim input values
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+
+    // Basic email validation regex
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let hasError = false;
+
+    // Reset previous styles
+    nameInput.classList.remove("error");
+    emailInput.classList.remove("error");
+    messageInput.classList.remove("error");
+
+    // Check if fields are empty
+    if (name === "") {
+        nameInput.classList.add("error");
+        hasError = true;
+    }
+    if (email === "" || !emailPattern.test(email)) {
+        emailInput.classList.add("error");
+        hasError = true;
+    }
+    if (message === "") {
+        messageInput.classList.add("error");
+        hasError = true;
+    }
+
+    if (hasError) {
+        contactMessage.textContent = "❌ Please fill in all required fields correctly.";
+        contactMessage.classList.add("error");
+        setTimeout(() => { contactMessage.textContent = ""; }, 5000);
+        return; // Stop form submission
+    }
+
+    // If validation passes, send the email
     emailjs.sendForm('service_v0yvpg5', 'template_1qdt58c', '#contact-form', '50jspKStyBIdh91No')
         .then(() => {
-            // Show sent message
-            contactMessage.textContent = 'Message sent successfully ✅';
+            contactMessage.textContent = '✅ Message sent successfully!';
+            contactMessage.classList.add("success");
 
-            // Remove message after five seconds
-            setTimeout(() => {
-                contactMessage.textContent = '';
-            }, 5000);
-
-            // Clear input fields
+            setTimeout(() => { contactMessage.textContent = ''; }, 5000);
             contactForm.reset();
         }, () => {
-            // Show error message
-            contactMessage.textContent = 'Message not sent (service error) ❌';
+            contactMessage.textContent = '❌ Message not sent (service error).';
+            contactMessage.classList.add("error");
 
-            // Remove message after five seconds
-            setTimeout(() => {
-                contactMessage.textContent = '';
-            }, 5000);
-
+            setTimeout(() => { contactMessage.textContent = ''; }, 5000);
         });
 };
 
+// Attach event listener
 contactForm.addEventListener('submit', sendEmail);
+
 
 /*=============== SHOW SCROLL UP ===============*/ 
 const scrollUp = () =>{
