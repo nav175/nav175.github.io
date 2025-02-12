@@ -447,7 +447,8 @@ img {
     row-gap: 2rem;
 }
 
-.education__data .experience__data {
+.education__data,
+.experience__data {
     row-gap: 1rem;
 }
 
@@ -670,13 +671,79 @@ img {
     }
 }
 
+.footer__link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    transition: color .4s;
+}
+
+.footer__link:hover {
+    color: var(--first-color-light);
+}
+
+.footer__copy {
+    color: var(--title-color);
+    font-size: var(--small-font-size);
+    text-align: center;
+}
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar {
+    width: 0.6rem;
+    background-color: hsl(var(--hue), 20%, 20%);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--hue), 20%, 30%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--hue), 20%, 40%);
+}
+
+/*=============== SCROLL UP ===============*/
+.scrollup {
+    position: fixed;
+    right: 1rem;
+    bottom: -50%;
+    background-color: var(--container-color);
+    display: inline-flex;
+    padding: 6px;
+    color: var(--title-color);
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px hsla(var(--hue), 30%, 8%, .3);
+    z-index: var(--z-tooltip);
+    transition: bottom .4s, transform .4s;
+}
+
+.scrollup:hover {
+    transform: translateY(-.5rem);
+}
+
+/* Show Scroll Up */
+.show-scroll {
+    bottom: 3rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 300px) {
+    .container {
+        margin-inline: 1rem;
+    }
+
+    .skills__content {
+        grid-template-columns: repeat(2, max-content);
+    }
+}
+
 /* For medium devices */
 @media screen and (min-width: 540px) {
 
     .home__container,
     .work__container,
     .info__container,
-    .services__container,
+    .projects__container,
     .contact__container {
         grid-template-columns: 350px;
         justify-content: center;
@@ -730,7 +797,7 @@ img {
         column-gap: 4rem;
     }
 
-    .services__container {
+    .projects__container {
         grid-template-columns: repeat(2, 320px);
     }
 }
@@ -830,7 +897,8 @@ img {
         row-gap: 4rem;
     }
 
-    .education__data .experience__data {
+    .education__data,
+    .experience__data {
         grid-template-columns: 320px 380px;
         column-gap: 11.5rem;
     }
@@ -840,7 +908,8 @@ img {
         font-size: var(--h1-font-size);
     }
 
-    .education__field .experience__profession {
+    .education__field,
+    .experience__profession {
         margin-bottom: .5rem;
     }
 
@@ -854,12 +923,12 @@ img {
         grid-template-columns: repeat(6, max-content);
     }
 
-    .services__container {
+    .projects__container {
         grid-template-columns: repeat(2, 350px);
         gap: 6re, 13rem;
     }
 
-    .services__icon {
+    .projects__icon {
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
     }
