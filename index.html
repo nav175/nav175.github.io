@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
@@ -14,7 +14,7 @@
     <!-- REMIXICONS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
 
-    <!-- CSS -->  
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Navjot's Portfolio</title>
@@ -24,7 +24,53 @@
     <!-- HEADER -->
     <header class="header" id="header">
         <!-- NAVIGATION BAR -->
+        <nav class="nav container">
+            <a href="#" class="nav__logo">Navjot</a>
 
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li>
+                        <a href="#home" class="nav__link">
+                            <i class="ri-home-4-line"></i> Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#work" class="nav__link">
+                            <i class="ri-briefcase-line"></i> Work
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#info" class="nav__link">
+                            <i class="ri-user-line"></i> My Info
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#projects" class="nav__link">
+                            <i class="ri-folder-line"></i></i> Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact" class="nav__link">
+                            <i class="ri-mail-line"></i> Contact Me
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Close button -->
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-large-line"></i>
+                </div>
+            </div>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- MAIN -->
@@ -47,21 +93,281 @@
                   <span class="home__scroll-text">Recent Works</span>
                </a>
             </div>
-         </section>
+        </section>
+
         <!-- WORKS -->
+        <section class="work section" id="work">
+            <h2 class="section__title">RECENT WORKS</h2>
+
+            <div class="work__container container grid">
+                <article class="work__card">
+                    <a href="https://github.com/nav175/Searching" target="_blank" class="work__link">
+                        <h2 class="work__title">Searching Algorithms</h2>
+                        <p class="work__description">
+                            Various search algorithms were implemented, it uses tkinter to show a visual implementation
+                            of these algorithms in a Vacuum Cleaner environment.
+                        </p>
+
+                        <img src="assets/img/work-1.jpg" alt="Search-Algorithm" class="work__img">
+
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                </article>
+
+                <article class="work__card">
+                    <a href="https://github.com/nav175/TicTacToe-AI-Agent" target="_blank" class="work__link">
+                        <h2 class="work__title">TicTacToe-AI-Agent</h2>
+                        <p class="work__description">
+                            This project was part of an AI course, it uses tkinter to play tictactoe using an AI agent
+                            that uses different search tree to find an efficient move.
+                        </p>
+
+                        <img src="assets/img/work-2.jpg" alt="TicTacToe" class="work__img">
+
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                </article>
+
+                <article class="work__card">
+                    <a href="https://github.com/nav175/wordList-cpp" target="_blank" class="work__link">
+                        <h2 class="work__title">WordList-C++</h2>
+                        <p class="work__description">
+                            This project implements a word list using an AVL tree to store and manage words, providing
+                            functionalities such as insertion, deletion, and various statistical analyses. It includes
+                            methods for balancing the tree, counting word occurrences, and printing statistics about the
+                            word list.
+                        </p>
+
+                        <img src="assets/img/work-3.jpg" alt="WordList-cpp" class="work__img">
+
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                </article>
+
+            </div>
+        </section>
 
         <!-- INFO -->
+        <section class="info section" id="info">
+            <h2 class="section__title">MY INFO</h2>
+
+            <div class="info__container container grid">
+                <!-- ABOUT -->
+                <div class="about grid">
+                    <div class="about__content">
+                        <h3 class="info__title">About Me</h3>
+                        <p class="about__description">
+                            <b>Dedicated</b> and <b>Ambitious</b> Computing Science student with a <b>keen eye for
+                                problem-solving</b>
+                            and a passion for technology, I strive to create <b>innovative and efficient solutions</b>.
+                            I'm always eager to <b>learn, adapt, and push</b> my skills to new heights.
+                        </p>
+
+                        <a href="assets/pdf/Navjot-Resume.pdf" download="Navjot-Resume.pdf" target="_blank"
+                            class="button about__button">Download
+                            Resume</a>
+                    </div>
+                </div>
+
+                <!-- EDUCATION -->
+                <div class="education">
+                    <h3 class="info__title">Education</h3>
+
+                    <div class="education__content grid">
+                        <div class="education__data grid">
+                            <h2 class="education__institution">Simon Fraser University</h2>
+
+                            <div>
+                                <h3 class="education__field">Bachelor of Science in Computing Science</h3>
+                                <span class="education__date">09/23 - Present</span>
+                                <p class="education__description">
+                                    Currently a second-year BSc Computing Science student, focusing on software development, algorithms, and artificial intelligence. Passionate about learning new technologies and enhancing my skills in the field.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIENCE -->
+                <div class="experience">
+                    <h3 class="info__title">Experience</h3>
+
+                    <div class="experience__content grid">
+                        <div class="experience__data grid">
+                            <h2 class="experience__company">Fraser International College</h2>
+
+                            <div>
+                                <h3 class="experience__profession">IT Squad Member</h3>
+                                <span class="experience__date">05/23 - 12/23</span>
+                                <p class="experience__description">
+                                    Provided technical support to students, faculty, and staff, troubleshooting
+                                    hardware, software, and network issues. Assisted with system maintenance, device
+                                    setup, and resolving technical inquiries to ensure smooth operations. Developed
+                                    strong problem-solving and communication skills while working in a fast-paced
+                                    environment.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKILLS -->
+                <div class="skills">
+                    <h3 class="info__title">Skills</h3>
+                    <div class="skills__content grid">
+
+                        <div class="skills__box">
+                            <img src="assets/img/info-html.svg" alt="html-svg" class="skills__img">
+                            <span class="skills__name">HTML</span>
+                        </div>
+
+                        <div class="skills__box">
+                            <img src="assets/img/info-css.svg" alt="css-svg" class="skills__img">
+                            <span class="skills__name">CSS</span>
+                        </div>
+
+                        <div class="skills__box">
+                            <img src="assets/img/info-python.svg" alt="python-svg" class="skills__img">
+                            <span class="skills__name">Python</span>
+                        </div>
+
+                        <div class="skills__box">
+                            <img src="assets/img/info-cpp.svg" alt="cpp-svg" class="skills__img">
+                            <span class="skills__name">C++</span>
+                        </div>
+
+                        <div class="skills__box">
+                            <img src="assets/img/info-git.svg" alt="git-svg" class="skills__img">
+                            <span class="skills__name">Git</span>
+                        </div>
+
+                        <div class="skills__box">
+                            <img src="assets/img/info-github.svg" alt="github-svg" class="skills__img">
+                            <span class="skills__name">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- PROJECTS -->
+        <section class="projects section" id="projects">
+            <h2 class="section__title">ONGOING PROJECTS</h2>
+
+            <div class="projects__container container grid">
+                <article class="projects__card">
+                    <i class="ri-plane-line projects__icon"></i>
+
+                    <h3 class="projects__title">Smart Flight Assistant</h3>
+                    <p class="projects__description">
+                        Developing a smart flight assistance app that enables users to search for flights, check
+                        pricing, track live updates, and get AI-powered travel assistance.Utilizing Amadeus API,
+                        AviationStack API, OpenAI API, and Google Gemini API to provide real-time data, chatbot support,
+                        and trip summarization.
+                    </p>
+                </article>
+
+                <article class="projects__card">
+                    <i class="ri-computer-line projects__icon"></i>
+
+                    <h3 class="projects__title">Personal Portfolio Website</h3>
+                    <p class="projects__description">
+                        Building a personal portfolio website to showcase my projects, skills, and experience. Developed
+                        using HTML, GitHub Pages, and version control best practices, including issues, branches, and
+                        pull requests. Continuously improving the design and content to create a professional online
+                        presence.
+                    </p>
+                </article>
+            </div>
+        </section>
 
         <!-- CONTACT -->
+        <section class="contact section" id="contact">
+            <h2 class="section__title">CONTACT ME</h2>
+
+            <div class="contact__container container grid">
+                <form action="" class="contact__form grid" id="contact-form">
+                    <div class="contact__group grid">
+                        <input type="text" name="user_name" placeholder="Names" class="contact__input">
+                        <input type="email" name="user_email" placeholder="Email" class="contact__input">
+                    </div>
+
+                    <textarea name="user_message" placeholder="Message" required
+                        class="contact__input contact__area"></textarea>
+
+                    <button type="submit" class="button contact__button">Send Message</button>
+
+                    <p class="contact__message" id="contact-message"></p>
+                </form>
+
+                <div class="contact__social grid">
+                    <a href="https://www.facebook.com/share/1DzeNZDVcM/?mibextid=wwXIfr" target="_blank"
+                        class="contact__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                        <span>Facebook</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/_navjot_dhillon__?igsh=MTZ5N2F0MDY4MnY4eg%3D%3D&utm_source=qr"
+                        target="_blank" class="contact__social-link">
+                        <i class="ri-instagram-line"></i>
+                        <span>Instagram</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/navjot-singh-6abba2287" target="_blank"
+                        class="contact__social-link">
+                        <i class="ri-linkedin-box-line"></i>
+                        <span>Linkedin</span>
+                    </a>
+
+                    <a href="https://github.com/nav175" target="_blank" class="contact__social-link">
+                        <i class="ri-github-line"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
 
     </main>
 
     <!-- FOOTER -->
     <footer class="footer">
+        <div class="footer__container container grid">
+            <ul class="footer__links">
+                <li>
+                    <a href="#home" class="footer__link">
+                        <i class="ri-home-4-line"></i> Home
+                    </a>
+                </li>
 
+                <li>
+                    <a href="#work" class="footer__link">
+                        <i class="ri-briefcase-line"></i> Work
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#info" class="footer__link">
+                        <i class="ri-user-line"></i> Info
+                    </a>
+                </li>
+            </ul>
+
+            <span class="footer__copy">
+                &#169; All Rights Reserved By Navjot
+            </span>
+        </div>
     </footer>
+
+    <!--=============== EMAIL JS ===============-->
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+   
+    <!--========== SCROLL UP ==========-->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    <script src="assets/js/scrollreveal.min.js"></script>
 
     <!-- MAIN JS -->
     <script src="assets/js/main.js"></script>
