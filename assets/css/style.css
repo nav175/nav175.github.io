@@ -589,6 +589,22 @@ img {
     color: var(--title-color);
 }
 
+/* Success message */
+.contact__message.success {
+    color: green;
+}
+
+/* Error message */
+.contact__message.error {
+    color: red;
+}
+
+/* Add red border to invalid fields */
+.contact__input.error {
+    border: 2px solid red;
+}
+
+
 /*=============== FOOTER ===============*/
 .footer {
     background-color: var(--container-color);
