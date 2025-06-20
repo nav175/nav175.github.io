@@ -149,3 +149,57 @@ sr.reveal(`.home__scroll`, {delay: 800})
 sr.reveal(`.work__card, .projects__card`, {interval: 100})
 sr.reveal(`.about__content`, {origin: 'right'})
 sr.reveal(`.about__img`, {origin: 'left'})
+
+/*=============== GLARE EFFECT ===============*/
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the glare element
+    const glare = document.getElementById('glare');
+    
+    // Initialize variables for smooth movement
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let targetX = mouseX;
+    let targetY = mouseY;
+    
+    if (glare) {
+        // Smooth animation function
+        function animateGlare() {
+            // Increased easing factor from 0.05 to 0.12 for faster following
+            mouseX += (targetX - mouseX) * 0.6;
+            mouseY += (targetY - mouseY) * 0.6;
+            
+            // Apply position
+            glare.style.left = mouseX + 'px';
+            glare.style.top = mouseY + 'px';
+            
+            requestAnimationFrame(animateGlare);
+        }
+        
+        // Update target position on mouse move
+        document.addEventListener('mousemove', function(e) {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+        
+        // Hide glare when mouse leaves window
+        document.addEventListener('mouseleave', function() {
+            glare.style.opacity = '0';
+        });
+        
+        // Show glare when mouse enters window
+        document.addEventListener('mouseenter', function() {
+            glare.style.opacity = '0.7'; // Increased from 0.6 to 0.7
+        });
+        
+        // Add subtle pulse effect on click for extra interactivity
+        document.addEventListener('click', function() {
+            glare.style.opacity = '0.85';
+            setTimeout(() => {
+                glare.style.opacity = '0.7';
+            }, 300);
+        });
+        
+        // Start the animation
+        animateGlare();
+    }
+});

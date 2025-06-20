@@ -925,3 +925,34 @@ img {
         right: 3rem;
     }
 }
+
+/*=============== GLARE EFFECT ===============*/
+#glare {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;  /* Reduced from 600px */
+    height: 300px; /* Reduced from 600px */
+    background: radial-gradient(
+        circle, 
+        rgba(100, 87, 224, 0.10) 0%, 
+        rgba(120, 132, 247, 0.08) 30%,
+        rgba(78, 59, 172, 0.06) 60%, 
+        transparent 85%
+    );
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 0;
+    transform: translate(-50%, -50%); 
+    filter: blur(22px);
+    opacity: 1;
+    border-radius: 50%;
+    will-change: transform;
+    transition: opacity 0.5s ease, transform 0.2s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+    #glare {
+        display: none;
+    }
+}
