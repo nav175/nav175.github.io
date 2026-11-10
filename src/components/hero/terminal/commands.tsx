@@ -236,7 +236,7 @@ const commands: Record<string, Command> = {
 /** Played on load, as if typed. Must stay free of side effects. */
 export const INTRO_COMMANDS = ['whoami', 'projects'] as const
 
-export const SUGGESTED_COMMANDS = ['help', 'stack', 'experience', 'contact', 'resume'] as const
+export const SUGGESTED_COMMANDS = ['help', 'stack', 'experience', 'contact', 'resume', 'clear'] as const
 
 /** Command string shown when the resume chip is clicked. */
 export const RESUME_TYPED_COMMAND = `open ${RESUME_FILE}`

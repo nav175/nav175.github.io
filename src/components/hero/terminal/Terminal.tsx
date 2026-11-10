@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { KeyboardEvent, MouseEvent, ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { cn } from '../../../lib/cn'
 import {
   commandForSuggestion,
@@ -35,6 +36,44 @@ function Cursor() {
   return <span aria-hidden="true" className="inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] animate-blink bg-mist/85" />
 }
 
+/** macOS traffic-light glyphs: ×, −, expand (out), restore (in). */
+function WindowGlyph({ kind }: { kind: 'close' | 'minimize' | 'expand' | 'restore' }) {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      aria-hidden="true"
+      className="size-3 opacity-0 transition-opacity duration-150 group-hover/lights:opacity-100 group-focus-within/lights:opacity-100"
+    >
+      {kind === 'close' ? (
+        <path d="M3.15 3.15 8.85 8.85M8.85 3.15 3.15 8.85" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" />
+      ) : null}
+      {kind === 'minimize' ? (
+        <path d="M3.05 6h5.9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      ) : null}
+      {kind === 'expand' ? (
+        <path
+          d="M6.45 1.7h3.85V5.55M10.15 1.85 6.2 5.8M5.55 10.3H1.7V6.45M1.85 10.15 5.8 6.2"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ) : null}
+      {kind === 'restore' ? (
+        <path
+          d="M6.35 3.15V5.6h2.45M6.45 5.5 9.95 2M5.65 8.85V6.4H3.2M5.55 6.5 2.05 10"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ) : null}
+    </svg>
+  )
+}
+
 export function Terminal() {
   const [entries, setEntries] = useState<Entry[]>(() =>
     prefersReducedMotion()
@@ -53,7 +92,11 @@ export function Terminal() {
   const nextId = useRef(INTRO_COMMANDS.length)
   const bodyRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const collapseRef = useRef<HTMLDivElement>(null)
+  const previousFrame = useRef<Frame>(frame)
+  const zoomedFocus = useRef(false)
   const busyRef = useRef(false)
+  const [minSettled, setMinSettled] = useState(false)
 
   const introDone = step >= INTRO_COMMANDS.length
   const chipBusy = chipCommand !== null
@@ -132,6 +175,74 @@ export function Terminal() {
     append(command)
   }
 
+  const zoomed = frame === 'zoom'
+
+  useEffect(() => {
+    if (!zoomed) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      event.preventDefault()
+      setFrame('open')
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = previous
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [zoomed])
+
+  useLayoutEffect(() => {
+    if (!zoomed) {
+      zoomedFocus.current = false
+      return
+    }
+    if (step < INTRO_COMMANDS.length) {
+      INTRO_COMMANDS.slice(step).forEach(append)
+      setStep(INTRO_COMMANDS.length)
+      setTyped(0)
+      return
+    }
+    if (chipCommand !== null) return
+    if (zoomedFocus.current) return
+    const input = inputRef.current
+    if (!input) return
+    zoomedFocus.current = true
+    input.focus({ preventScroll: true })
+  }, [append, chipCommand, step, zoomed])
+
+  useEffect(() => {
+    const from = previousFrame.current
+    previousFrame.current = frame
+    if (frame !== 'min') {
+      setMinSettled(false)
+      return
+    }
+    // Closing the zoomed overlay remounts the bar already collapsed, so skip the wait.
+    if (from === 'zoom' || prefersReducedMotion()) {
+      setMinSettled(true)
+      return
+    }
+    const el = collapseRef.current
+    let settled = false
+    const finish = () => {
+      if (settled) return
+      settled = true
+      setMinSettled(true)
+    }
+    const onEnd = (event: globalThis.TransitionEvent) => {
+      if (event.target !== el || event.propertyName !== 'grid-template-rows') return
+      finish()
+    }
+    el?.addEventListener('transitionend', onEnd)
+    const timer = window.setTimeout(finish, 560)
+    return () => {
+      el?.removeEventListener('transitionend', onEnd)
+      window.clearTimeout(timer)
+    }
+  }, [frame])
+
   const closeWindow = () => {
     busyRef.current = false
     setChipCommand(null)
@@ -207,64 +318,123 @@ export function Terminal() {
       ? INTRO_COMMANDS[step].slice(0, typed)
       : null
 
-  return (
-    <div className="group/terminal glass relative overflow-hidden rounded-2xl transition-[border-color] duration-300 focus-within:border-overlay/20">
+  const shell = (
+    <div
+      role={zoomed ? 'dialog' : undefined}
+      aria-modal={zoomed || undefined}
+      aria-label={zoomed ? 'Terminal' : undefined}
+      className={cn(
+        'group/terminal glass relative flex flex-col overflow-hidden rounded-2xl transition-[border-color] duration-300 focus-within:border-overlay/20',
+        frame === 'min' && 'hover:border-overlay/25',
+        zoomed && 'isolate h-full bg-graphite bg-none shadow-[0_40px_100px_-28px_rgb(0_0_0/0.55)] backdrop-blur-none',
+      )}
+      style={zoomed ? { background: 'var(--graphite)', backdropFilter: 'none', WebkitBackdropFilter: 'none' } : undefined}
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-10 top-0 h-px bg-linear-to-r from-transparent via-overlay/45 to-transparent"
       />
 
-      <div className={cn('relative flex h-11 items-center px-2.5', frame !== 'min' && 'border-b border-line')}>
-        <div className="relative z-10 flex">
+      <div
+        className={cn(
+          'relative flex h-11 items-center px-2.5',
+          !(frame === 'min' && minSettled) && 'border-b border-line',
+        )}
+      >
+        <div
+          className={cn(
+            'group/lights relative z-10 flex transition-opacity duration-300 motion-reduce:transition-none',
+            minSettled && 'opacity-0',
+          )}
+          inert={frame === 'min' ? true : undefined}
+          aria-hidden={minSettled || undefined}
+        >
           {(
             [
-              ['close', frame === 'min' ? 'Open a new session' : 'Close terminal', 'bg-[#ff5f57]'],
-              ['minimize', frame === 'min' ? 'Restore terminal' : 'Minimize terminal', 'bg-[#febc2e]'],
-              ['zoom', frame === 'zoom' ? 'Restore terminal size' : 'Zoom terminal', 'bg-[#28c840]'],
+              ['close', 'Close terminal', 'bg-[#ff5f57]', 'close'],
+              ['minimize', 'Minimize terminal', 'bg-[#febc2e]', 'minimize'],
+              ['zoom', zoomed ? 'Restore terminal size' : 'Maximize terminal', 'bg-[#28c840]', zoomed ? 'restore' : 'expand'],
             ] as const
-          ).map(([id, label, color]) => (
-            <button
-              key={id}
-              type="button"
-              aria-label={label}
-              title={label}
-              aria-pressed={id === 'zoom' ? frame === 'zoom' : undefined}
-              onClick={(event) => {
-                event.stopPropagation()
-                if (id === 'close') {
-                  if (frame === 'min') setFrame('open')
-                  else closeWindow()
-                } else if (id === 'minimize') {
-                  setFrame((current) => (current === 'min' ? 'open' : 'min'))
-                  inputRef.current?.blur()
-                } else {
-                  setFrame((current) => (current === 'zoom' ? 'open' : 'zoom'))
-                }
-              }}
-              className="group/light grid size-6 place-items-center rounded-full"
-            >
-              <span
-                className={cn(
-                  'size-2.5 rounded-full transition-transform duration-200 group-hover/light:scale-125 group-active/light:scale-90',
-                  color,
-                )}
-              />
-            </button>
-          ))}
+          ).map(([id, label, color, glyph]) => {
+            const inactive = zoomed && id === 'minimize'
+            const unavailable = 'Unavailable while maximized'
+            return (
+              <button
+                key={id}
+                type="button"
+                aria-label={inactive ? `${label}, ${unavailable.toLowerCase()}` : label}
+                title={inactive ? unavailable : label}
+                disabled={inactive}
+                aria-pressed={id === 'zoom' ? zoomed : undefined}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  if (id === 'close') closeWindow()
+                  else if (id === 'minimize') {
+                    setFrame('min')
+                    inputRef.current?.blur()
+                  } else setFrame((current) => (current === 'zoom' ? 'open' : 'zoom'))
+                }}
+                className="grid size-6 place-items-center rounded-full disabled:cursor-default"
+              >
+                <span
+                  className={cn(
+                    'grid size-3 place-items-center rounded-full text-black/80',
+                    inactive ? 'bg-[#8d939c]' : color,
+                  )}
+                >
+                  {inactive ? null : <WindowGlyph kind={glyph} />}
+                </span>
+              </button>
+            )
+          })}
         </div>
-        <p className="pointer-events-none absolute inset-x-0 text-center font-mono text-[12px] text-smoke">navjot@portfolio: ~</p>
+        <p className="pointer-events-none absolute inset-0 grid place-items-center px-16 font-mono text-[12px]">
+          <span
+            className={cn(
+              'col-start-1 row-start-1 text-smoke transition-opacity duration-200',
+              frame === 'min' && 'group-hover/terminal:opacity-0 group-focus-within/terminal:opacity-0',
+            )}
+          >
+            navjot@portfolio: ~
+          </span>
+          {frame === 'min' ? (
+            <span className="col-start-1 row-start-1 text-mist opacity-0 transition-opacity duration-200 group-hover/terminal:opacity-100 group-focus-within/terminal:opacity-100">
+              Open terminal
+            </span>
+          ) : null}
+        </p>
         {frame === 'min' ? (
-          <button type="button" aria-label="Restore terminal" onClick={() => setFrame('open')} className="absolute inset-0" />
+          <span className="pointer-events-none relative z-30 ml-auto pr-1.5 font-mono text-[11px] text-smoke transition-opacity duration-200 group-hover/terminal:opacity-0 group-focus-within/terminal:opacity-0">
+            open
+          </span>
+        ) : null}
+        {frame === 'min' ? (
+          <button
+            type="button"
+            aria-label="Open terminal"
+            title="Open terminal"
+            onClick={() => setFrame('open')}
+            className="absolute inset-0 z-20 cursor-pointer"
+          />
         ) : null}
       </div>
 
-      <div className={cn(frame === 'min' && 'hidden')}>
+      <div
+        ref={collapseRef}
+        className={cn(
+          'grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none',
+          frame === 'min' ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',
+          zoomed && 'min-h-0 flex-1',
+        )}
+        inert={frame === 'min' ? true : undefined}
+      >
+      <div className={cn('min-h-0 overflow-hidden', zoomed && 'flex h-full flex-col')}>
       <div
         ref={bodyRef}
         onClick={focusInput}
         className={cn(
           'scrollbar-none cursor-text overflow-y-auto overscroll-contain px-4 py-4 font-mono text-[12.5px] leading-[1.7] sm:px-5 sm:text-[13px]',
-          frame === 'zoom' ? 'h-[28rem] sm:h-[34rem]' : 'h-[19.5rem] sm:h-[21rem]',
+          zoomed ? 'min-h-0 flex-1' : 'h-[19.5rem] sm:h-[21rem]',
         )}
       >
         <div role="log" aria-label="Terminal output" className="space-y-3">
@@ -323,6 +493,27 @@ export function Terminal() {
         ))}
       </div>
       </div>
+      </div>
     </div>
+  )
+
+  if (!zoomed) return shell
+
+  return (
+    <>
+      <div aria-hidden="true" className="h-[25rem] sm:h-[26.5rem]" />
+      {createPortal(
+        <div className="fixed inset-0 z-[80] p-3 sm:p-6 lg:p-10">
+          <button
+            type="button"
+            aria-label="Restore terminal size"
+            onClick={() => setFrame('open')}
+            className="absolute inset-0 bg-black/45 backdrop-blur-xl supports-[backdrop-filter]:bg-black/20"
+          />
+          <div className="relative z-10 h-full">{shell}</div>
+        </div>,
+        document.body,
+      )}
+    </>
   )
 }
