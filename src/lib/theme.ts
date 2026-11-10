@@ -28,12 +28,24 @@ export function resolveTheme(preference: ThemePreference): ResolvedTheme {
   return preference
 }
 
+/** Point the tab icon at the light or dark mark. Filenames share the `favicon-light` / `favicon-dark` token. */
+export function syncFavicon(resolved: ResolvedTheme) {
+  const tone = resolved === 'dark' ? 'dark' : 'light'
+  document.querySelectorAll<HTMLLinkElement>('link[data-favicon]').forEach((link) => {
+    const href = link.getAttribute('href')
+    if (!href) return
+    const next = href.replace(/favicon-(light|dark)/, `favicon-${tone}`)
+    if (next !== href) link.setAttribute('href', next)
+  })
+}
+
 export function applyTheme(preference: ThemePreference) {
   const resolved = resolveTheme(preference)
   const root = document.documentElement
   root.classList.toggle('dark', resolved === 'dark')
   root.style.colorScheme = resolved
   root.dataset.theme = preference
+  syncFavicon(resolved)
 }
 
 export function nextTheme(current: ThemePreference): ThemePreference {

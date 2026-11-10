@@ -16,11 +16,11 @@
     <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href="https://nav175.github.io/" />
 
-    <!-- PNG first: Safari ignores SVG favicons and PNG-compressed .ico files. -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- PNG first: Safari ignores SVG favicons and PNG-compressed .ico files. The script swaps light/dark. -->
+    <link rel="icon" type="image/png" sizes="32x32" data-favicon href="/favicon-light-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" data-favicon href="/favicon-light-16x16.png" />
+    <link rel="icon" data-favicon href="/favicon-light.ico" sizes="48x48" />
+    <link rel="icon" data-favicon href="/favicon-light.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -70,6 +70,11 @@
         root.classList.toggle('dark', dark)
         root.style.colorScheme = dark ? 'dark' : 'light'
         root.dataset.theme = preference
+        const tone = dark ? 'dark' : 'light'
+        document.querySelectorAll('link[data-favicon]').forEach((link) => {
+          const href = link.getAttribute('href')
+          if (href) link.setAttribute('href', href.replace(/favicon-(light|dark)/, 'favicon-' + tone))
+        })
       })()
     </script>
   </head>

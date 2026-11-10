@@ -84,21 +84,22 @@ const edgeGradient = (id) => `<linearGradient id="${id}" x1="0.28" y1="-0.1" x2=
   </linearGradient>`
 
 /**
- * Rounded tile. Favicons use a light face: Safari ignores SVG and PNG-in-ICO,
- * and a near-black tile disappears on a dark tab bar. App icons stay dark.
+ * Rounded tile. `light` and `dark` are the tab icons, swapped with the site theme.
+ * App icons stay on the dark monogram.
  */
-function tileIcon(size, tone = 'dark') {
+function tileIcon(size, tone = 'app') {
   const stroke = Math.max(1, size / 32)
   const inset = stroke / 2
   const radius = size * (8 / 32)
   const face = tone === 'light' ? '#f4f5f7' : color.graphite
   const ink = tone === 'light' ? '#0c0e12' : color.mist
-  const edge = tone === 'light' ? 'rgb(12 14 18 / 0.18)' : 'url(#edge)'
-  const defs = tone === 'light' ? '' : `<defs>${edgeGradient('edge')}</defs>`
+  // A solid edge keeps the dark tile visible on a dark tab bar. App icons keep the hairline gradient.
+  const edge = tone === 'light' ? 'rgb(12 14 18 / 0.18)' : tone === 'dark' ? 'rgb(255 255 255 / 0.55)' : 'url(#edge)'
+  const defs = tone === 'app' ? `<defs>${edgeGradient('edge')}</defs>` : ''
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
   ${defs}
   <rect x="${trim(inset)}" y="${trim(inset)}" width="${trim(size - stroke)}" height="${trim(size - stroke)}" rx="${trim(radius)}" fill="${face}" stroke="${edge}" stroke-width="${trim(stroke)}"/>
-  <path fill="${ink}" d="${monogramLetters(size, size * 0.52)}"/>
+  <path fill="${ink}" d="${monogramLetters(size, size * (tone === 'app' ? 0.47 : 0.52))}"/>
 </svg>
 `
 }
@@ -249,19 +250,29 @@ function ico(images) {
   return Buffer.concat([header, ...images.map(({ data }) => data)])
 }
 
-const faviconPng = (size) => png(tileIcon(size, 'light'), size)
+const faviconSet = (tone) => {
+  const pngAt = (size) => png(tileIcon(size, tone), size)
+  return {
+    [`favicon-${tone}.svg`]: tileIcon(32, tone),
+    [`favicon-${tone}-16x16.png`]: pngAt(16),
+    [`favicon-${tone}-32x32.png`]: pngAt(32),
+    [`favicon-${tone}.ico`]: ico([16, 32, 48].map((size) => ({ size, data: pngAt(size) }))),
+  }
+}
 
 const outputs = {
-  'favicon.svg': tileIcon(32, 'light'),
-  'favicon-16x16.png': faviconPng(16),
-  'favicon-32x32.png': faviconPng(32),
-  'favicon.ico': ico([16, 32, 48].map((size) => ({ size, data: faviconPng(size) }))),
+  ...faviconSet('light'),
+  ...faviconSet('dark'),
+  // Browsers request /favicon.ico on their own, before any theme script runs.
+  'favicon.ico': null,
   'apple-touch-icon.png': png(bleedIcon(180, 0.42), 180),
   'icon-192.png': png(tileIcon(192), 192),
   'icon-512.png': png(tileIcon(512), 512),
   'icon-maskable-512.png': png(bleedIcon(512, 0.36), 512),
   'og-image.png': png(socialImage(), 1200),
 }
+
+outputs['favicon.ico'] = outputs['favicon-light.ico']
 
 for (const [file, data] of Object.entries(outputs)) {
   await writeFile(new URL(file, publicDir), data)
