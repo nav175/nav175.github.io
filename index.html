@@ -1,390 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="google-site-verification" content="d2VHVhD8WcJymRVTHhdM_tB-waglahluzVOBrK5s0to" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- FAVICON -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets/favicon/site.webmanifest">
-
-    <!-- REMIXICONS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <title>Navjot's Portfolio</title>
-</head>
-
-<body>
-    <!-- GLARE EFFECT -->
-    <div id="glare"></div>
-    
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <!-- NAVIGATION BAR -->
-        <nav class="nav container">
-            <a href="#home" class="nav__logo">Navjot</a>
-
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li>
-                        <a href="#home" class="nav__link">
-                            <i class="ri-home-4-line"></i> Home
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#work" class="nav__link">
-                            <i class="ri-briefcase-line"></i> Work
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#info" class="nav__link">
-                            <i class="ri-user-line"></i> My Info
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#projects" class="nav__link">
-                            <i class="ri-folder-line"></i> Projects
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#contact" class="nav__link">
-                            <i class="ri-mail-line"></i> Contact Me
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Close button -->
-                <div class="nav__close" id="nav-close">
-                    <i class="ri-close-large-line"></i>
-                </div>
-            </div>
-
-            <!-- Toggle button -->
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="ri-menu-line"></i>
-            </div>
-        </nav>
-    </header>
-
-    <!-- MAIN -->
-    <main class="main">
-        <!-- HOME -->
-        <section class="home section" id="home">
-            <div class="home__container container grid">
-                <img src="assets/img/profile-pic.png" alt="home-profile" class="home__img">
-                <div class="home__data">
-                    <h1 class="home__name">Navjot <br> Singh</h1>
-                    <h3 class="home__profession">Computing Science Student</h3>
-                </div>
-
-
-                <a href="#work" class="home__scroll">
-                    <div class="home__scroll-box">
-                        <i class="ri-arrow-down-line"></i>
-                    </div>
-
-                    <span class="home__scroll-text">Recent Works</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- WORKS -->
-        <section class="work section" id="work">
-            <h2 class="section__title">RECENT WORKS</h2>
-
-            <div class="work__container container grid">
-                <article class="work__card">
-                    <a href="https://github.com/nav175/Searching" target="_blank" class="work__link">
-                        <h2 class="work__title">Searching Algorithms</h2>
-                        <p class="work__description">
-                            Various search algorithms were implemented. The project uses Tkinter to visually demonstrate
-                            these algorithms in a vacuum cleaner environment.
-                        </p>
-
-                        <img src="assets/img/work-1.jpg" alt="Search-Algorithm" class="work__img">
-
-                        <i class="ri-arrow-right-line"></i>
-                    </a>
-                </article>
-
-                <article class="work__card">
-                    <a href="https://github.com/nav175/TicTacToe-AI-Agent" target="_blank" class="work__link">
-                        <h2 class="work__title">TicTacToe-AI-Agent</h2>
-                        <p class="work__description">
-                            This project was part of an AI course, it uses Tkinter to play Tic-Tac-Toe with an AI agent
-                            that applies different search trees to determine optimal moves.
-                        </p>
-
-                        <img src="assets/img/work-2.jpg" alt="TicTacToe" class="work__img">
-
-                        <i class="ri-arrow-right-line"></i>
-                    </a>
-                </article>
-
-                <article class="work__card">
-                    <a href="https://github.com/nav175/wordList-cpp" target="_blank" class="work__link">
-                        <h2 class="work__title">WordList-C++</h2>
-                        <p class="work__description">
-                            This project implements a word list using an AVL tree to store and manage words, providing
-                            functionalities such as insertion, deletion, and various statistical analyses. It includes
-                            methods for balancing the tree, counting word occurrences, and printing statistics about the
-                            word list.
-                        </p>
-
-                        <img src="assets/img/work-3.jpg" alt="WordList-cpp" class="work__img">
-
-                        <i class="ri-arrow-right-line"></i>
-                    </a>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- INFO -->
-        <section class="info section" id="info">
-            <h2 class="section__title">MY INFO</h2>
-
-            <div class="info__container container grid">
-                <!-- ABOUT -->
-                <div class="about grid">
-                    <div class="about__content">
-                        <h3 class="info__title">About Me</h3>
-                        <p class="about__description">
-                            A Dedicated and Ambitious <b>Computing Science</b> student with a keen eye for
-                            <b>problem-solving</b> and a passion for <b>technology</b>, I strive to create
-                            <b>innovative</b> and <b>efficient</b> solutions.
-                            I'm always eager to <b>learn, adapt, and push</b> my skills to new heights.
-                        </p>
-
-                        <a href="assets/pdf/Navjot-Resume.pdf" download="Navjot-Resume.pdf" target="_blank"
-                            class="button about__button">Download
-                            Resume</a>
-                    </div>
-
-                    <!-- ABOUT IMAGE -->
-                    <img src="assets/img/profile-pic.png" alt="about-image" class="about__img">
-                </div>
-
-                <!-- EDUCATION -->
-                <div class="education">
-                    <h3 class="info__title">Education</h3>
-
-                    <div class="education__content grid">
-                        <div class="education__data grid">
-                            <h2 class="education__institution">Simon Fraser University</h2>
-
-                            <div>
-                                <h3 class="education__field">Bachelor of Science in Computing Science</h3>
-                                <span class="education__date">09/23 - Present</span>
-                                <p class="education__description">
-                                    Currently a second-year BSc Computing Science student, focusing on software
-                                    development, algorithms, and artificial intelligence. Passionate about learning new
-                                    technologies and enhancing my skills in the field.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EXPERIENCE -->
-                <div class="experience">
-                    <h3 class="info__title">Experience</h3>
-
-                    <div class="experience__content grid">
-                        <div class="experience__data grid">
-                            <h2 class="experience__company">Fraser International College</h2>
-
-                            <div>
-                                <h3 class="experience__profession">IT Squad Member</h3>
-                                <span class="experience__date">05/23 - 12/23</span>
-                                <p class="experience__description">
-                                    Provided technical support to students, faculty, and staff, troubleshooting
-                                    hardware, software, and network issues. Assisted with system maintenance, device
-                                    setup, and resolving technical inquiries to ensure smooth operations. Developed
-                                    strong problem-solving and communication skills while working in a fast-paced
-                                    environment.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SKILLS -->
-                <div class="skills">
-                    <h3 class="info__title">Skills</h3>
-                    <div class="skills__content grid">
-
-                        <div class="skills__box">
-                            <img src="assets/img/info-html.svg" alt="HTML logo" class="skills__img">
-                            <span class="skills__name">HTML</span>
-                        </div>
-
-                        <div class="skills__box">
-                            <img src="assets/img/info-css.svg" alt="CSS logo" class="skills__img">
-                            <span class="skills__name">CSS</span>
-                        </div>
-
-                        <div class="skills__box">
-                            <img src="assets/img/info-python.svg" alt="Python logo" class="skills__img">
-                            <span class="skills__name">Python</span>
-                        </div>
-
-                        <div class="skills__box">
-                            <img src="assets/img/info-cpp.svg" alt="C++ logo" class="skills__img">
-                            <span class="skills__name">C++</span>
-                        </div>
-
-                        <div class="skills__box">
-                            <img src="assets/img/info-git.svg" alt="Git logo" class="skills__img">
-                            <span class="skills__name">Git</span>
-                        </div>
-
-                        <div class="skills__box">
-                            <img src="assets/img/info-github.svg" alt="GitHub logo" class="skills__img">
-                            <span class="skills__name">GitHub</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PROJECTS -->
-        <section class="projects section" id="projects">
-            <h2 class="section__title">ONGOING PROJECTS</h2>
-
-            <div class="projects__container container grid">
-                <article class="projects__card">
-                    <i class="ri-plane-line projects__icon"></i>
-
-                    <h3 class="projects__title">Smart Flight Assistant</h3>
-                    <p class="projects__description">
-                        Developing a smart flight assistance app that enables users to search for flights, check
-                        pricing, track live updates, and get AI-powered travel assistance. Utilizing Amadeus API,
-                        AviationStack API, OpenAI API, and Google Gemini API to provide real-time data, chatbot support,
-                        and trip summarization.
-                    </p>
-                </article>
-
-                <article class="projects__card">
-                    <i class="ri-computer-line projects__icon"></i>
-
-                    <h3 class="projects__title">Personal Portfolio Website</h3>
-                    <p class="projects__description">
-                        Building a personal portfolio website to showcase my projects, skills, and experience. Developed
-                        using HTML, GitHub Pages, and version control best practices, including issues, branches, and
-                        pull requests. Continuously improving the design and content to create a professional online
-                        presence.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section class="contact section" id="contact">
-            <h2 class="section__title">CONTACT ME</h2>
-
-            <div class="contact__container container grid">
-                <form action="" class="contact__form grid" id="contact-form">
-                    <div class="contact__group grid">
-                        <input type="text" name="user_name" placeholder="Name" class="contact__input">
-                        <input type="email" name="user_email" placeholder="Email" class="contact__input">
-                    </div>
-
-                    <textarea name="user_message" placeholder="Message" required
-                        class="contact__input contact__area"></textarea>
-
-                    <button type="submit" class="button contact__button">Send Message</button>
-
-                    <p class="contact__message" id="contact-message"></p>
-                </form>
-
-                <div class="contact__social grid">
-                    <a href="https://www.facebook.com/share/1DzeNZDVcM/?mibextid=wwXIfr" target="_blank"
-                        class="contact__social-link">
-                        <i class="ri-facebook-circle-line"></i>
-                        <span>Facebook</span>
-                    </a>
-
-                    <a href="https://www.instagram.com/_navjot_dhillon__?igsh=MTZ5N2F0MDY4MnY4eg%3D%3D&utm_source=qr"
-                        target="_blank" class="contact__social-link">
-                        <i class="ri-instagram-line"></i>
-                        <span>Instagram</span>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/navjot-singh-6abba2287" target="_blank"
-                        class="contact__social-link">
-                        <i class="ri-linkedin-box-line"></i>
-                        <span>Linkedin</span>
-                    </a>
-
-                    <a href="https://github.com/nav175" target="_blank" class="contact__social-link">
-                        <i class="ri-github-line"></i>
-                        <span>GitHub</span>
-                    </a>
-
-                    <a href="mailto:navjotsingh09494@gmail.com" target="_blank" class="contact__social-link">
-                        <i class="ri-mail-line"></i>
-                        <span>Email</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer__container container grid">
-            <ul class="footer__links">
-                <li>
-                    <a href="#home" class="footer__link">
-                        <i class="ri-home-4-line"></i> Home
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#work" class="footer__link">
-                        <i class="ri-briefcase-line"></i> Work
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#info" class="footer__link">
-                        <i class="ri-user-line"></i> Info
-                    </a>
-                </li>
-            </ul>
-
-            <span class="footer__copy">
-                &#169; All Rights Reserved By Navjot
-            </span>
-        </div>
-    </footer>
-
-    <!--=============== EMAIL JS ===============-->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-    <!--========== SCROLL UP ==========-->
-    <a href="#" class="scrollup" id="scroll-up">
-        <i class="ri-arrow-up-line"></i>
-    </a>
-
-    <!--=============== SCROLLREVEAL ===============-->
-    <script src="assets/js/scrollreveal.min.js"></script>
-
-    <!-- MAIN JS -->
-    <script src="assets/js/main.js"></script>
-</body>
-
+    <title>Navjot Singh | Software Engineer</title>
+    <meta
+      name="description"
+      content="Navjot Singh is a Computing Science student at Simon Fraser University who builds full-stack software, from an enterprise inventory platform at Skytec Supply to HyperSpace, a StormHacks 2026 prize winner."
+    />
+    <meta name="author" content="Navjot Singh" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href="https://nav175.github.io/" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Navjot Singh" />
+    <meta property="og:url" content="https://nav175.github.io/" />
+    <meta property="og:title" content="Navjot Singh | Software Engineer" />
+    <meta
+      property="og:description"
+      content="Full-stack software, from schema to screen. Production inventory platform at Skytec Supply, and a StormHacks 2026 prize-winning hyperbolic knowledge map."
+    />
+    <meta property="og:image" content="https://nav175.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Navjot Singh, software engineer. I build full-stack software, from schema to screen." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Navjot Singh",
+        "url": "https://nav175.github.io/",
+        "jobTitle": "Software Engineer",
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Simon Fraser University" },
+        "sameAs": [
+          "https://github.com/nav175",
+          "https://www.linkedin.com/in/navjot-s",
+          "https://devpost.com/nav175"
+        ]
+      }
+    </script>
+
+    <!-- Apply the stored theme before paint. Default is light; "system" follows the OS. -->
+    <script>
+      (() => {
+        const key = 'portfolio-theme'
+        let preference = 'light'
+        try {
+          const stored = localStorage.getItem(key)
+          if (stored === 'light' || stored === 'dark' || stored === 'system') preference = stored
+        } catch {}
+        const dark =
+          preference === 'dark' ||
+          (preference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        const root = document.documentElement
+        root.classList.toggle('dark', dark)
+        root.style.colorScheme = dark ? 'dark' : 'light'
+        root.dataset.theme = preference
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <main style="max-width: 40rem; margin: 4rem auto; padding: 0 1.5rem; font-family: system-ui, sans-serif; color: #0c0e12; background: #f6f7f9; line-height: 1.6">
+        <h1>Navjot Singh</h1>
+        <p>Computing Science student at Simon Fraser University. I build full-stack software, from schema to screen.</p>
+        <p>
+          <a style="color: #0c0e12" href="https://github.com/nav175">GitHub</a> ·
+          <a style="color: #0c0e12" href="https://www.linkedin.com/in/navjot-s">LinkedIn</a> ·
+          <a style="color: #0c0e12" href="mailto:nsn8@sfu.ca">Email</a> ·
+          <a style="color: #0c0e12" href="assets/pdf/Navjot-Resume.pdf">Resume</a>
+        </p>
+      </main>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

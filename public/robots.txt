@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nav175.github.io/sitemap.xml

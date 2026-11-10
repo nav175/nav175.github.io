@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Navjot Singh - Resume</title>
+    <style>
+      @page {
+        size: letter;
+        margin: 0.45in 0.55in;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: #111;
+        background: #fff;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 10.4pt;
+        line-height: 1.28;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      h1 {
+        margin: 0;
+        text-align: center;
+        font-size: 20pt;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+      .contact {
+        margin: 0.18em 0 0.55em;
+        text-align: center;
+        font-size: 10pt;
+      }
+      h2 {
+        margin: 0.55em 0 0.22em;
+        padding-bottom: 0.08em;
+        border-bottom: 1px solid #111;
+        font-size: 11pt;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        align-items: baseline;
+      }
+      .org {
+        font-weight: 700;
+      }
+      .muted {
+        font-style: italic;
+      }
+      .meta {
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      ul {
+        margin: 0.15em 0 0.35em 1.1em;
+        padding: 0;
+      }
+      li {
+        margin: 0.08em 0;
+      }
+      .skills p {
+        margin: 0.12em 0;
+      }
+      .label {
+        font-weight: 700;
+      }
+      .project-title {
+        font-weight: 700;
+      }
+      .tech {
+        font-style: italic;
+        margin: 0.05em 0 0.08em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Navjot Singh</h1>
+    <p class="contact">
+      Surrey, BC | +1 (604) 417-4647 | nsn8@sfu.ca | linkedin.com/in/navjot-s
+    </p>
+
+    <h2>Education</h2>
+    <div class="row">
+      <span class="org">Simon Fraser University</span>
+      <span class="meta">Burnaby, BC | Expected 2027</span>
+    </div>
+    <p class="muted" style="margin: 0.1em 0 0.2em">B.Sc. in Computer Science (In progress), CGPA: 3.76/4.33</p>
+
+    <h2>Skills</h2>
+    <div class="skills">
+      <p><span class="label">Languages:</span> Python; JavaScript; TypeScript; SQL; Java; C/C++</p>
+      <p><span class="label">Tools &amp; Integrations:</span> REST APIs; Jira; Excel; Git / GitHub Actions; Docker</p>
+      <p><span class="label">Data &amp; Web Tech:</span> Data Visualization Dashboards; PostgreSQL; React; Node.js; Data Analysis</p>
+      <p>
+        <span class="label">Core Competencies:</span> Automated Workflows, Cross-Platform Integration, Technical Project
+        Management Support
+      </p>
+    </div>
+
+    <h2>Experience</h2>
+    <div class="row">
+      <span><span class="org">Software Developer (Co-op)</span> | SKYTEC SUPPLY INC</span>
+      <span class="meta">May 2026 – Aug 2026 | Surrey, BC</span>
+    </div>
+    <ul>
+      <li>
+        Built and shipped Skytec Stockroom, a cross-platform inventory, rental dispatch, and rebar tonnage app for iOS,
+        Android, and the web from one Expo codebase.
+      </li>
+      <li>
+        Designed a three-tier role system (Admin, Yard Operations, Client Portal) with PostgreSQL row-level security and
+        atomic RPC transactions across 32+ migrations.
+      </li>
+      <li>
+        Automated workflows with serverless Edge Functions (JS/Python), Expo push, Resend email, and two-way QuickBooks
+        Online inventory sync over OAuth 2.0.
+      </li>
+      <li>Owned Git-based collaboration and CI/CD for feature delivery across the co-op term.</li>
+    </ul>
+
+    <div class="row">
+      <span><span class="org">Technology Specialist (Contract)</span> | FRASER INTERNATIONAL COLLEGE</span>
+      <span class="meta">May 2024 – Dec 2024 | Burnaby, BC</span>
+    </div>
+    <ul>
+      <li>Triaged and resolved software, hardware, and network tickets for students, faculty, and staff in Jira.</li>
+      <li>Standardized reporting workflows in Excel and documented root-cause analysis for recurring issues.</li>
+    </ul>
+
+    <h2>Technical Projects</h2>
+
+    <div class="row">
+      <span class="project-title">Hyperspace | Data Visualization &amp; API Integration</span>
+      <span class="meta">Oct 2026</span>
+    </div>
+    <p class="tech">JavaScript, TypeScript, React, Cloud APIs</p>
+    <ul>
+      <li>StormHacks 2026 Hackathon Winner; built a hyperbolic knowledge map over 5,635 Wikipedia AI topics.</li>
+      <li>Implemented hybrid vector and full-text search with interactive canvas visualization and Cloud API tooling.</li>
+    </ul>
+
+    <div class="row">
+      <span class="project-title">Multithreaded MapReduce Engine</span>
+      <span class="meta">Oct 2025 – Nov 2025</span>
+    </div>
+    <p class="tech">C/C++, Scripting, Data Analysis, Backend Workflows</p>
+    <ul>
+      <li>Parsed large datasets and coordinated concurrent map/reduce workers with shell scripts.</li>
+      <li>Visualized thread latency across pipeline stages to diagnose bottlenecks.</li>
+    </ul>
+
+    <div class="row">
+      <span class="project-title">DermaScan AI | Workflow Automation</span>
+      <span class="meta">Mar 2025 – Apr 2025</span>
+    </div>
+    <p class="tech">Python, Docker, Automated Testing</p>
+    <ul>
+      <li>Built a computer-vision evaluation workflow for skin-image data with automated testing gates.</li>
+      <li>Containerized the runtime with Docker for repeatable local and shared runs.</li>
+    </ul>
+
+    <div class="row">
+      <span class="project-title">IoT &amp; Embedded Systems Integration | Sensor Automation &amp; Firmware</span>
+      <span class="meta">Jan 2026</span>
+    </div>
+    <p class="tech">C, Python, Arduino Microcontrollers, Hardware Testing (Oscilloscope, Multimeter)</p>
+    <ul>
+      <li>Programmed low-level microcontrollers in C to process real-time sensor data and control output actuators.</li>
+      <li>Built Python telemetry scripts to interface with microcontrollers for automated sensor data acquisition and logging.</li>
+      <li>
+        Conducted systematic hardware diagnostic testing using oscilloscopes and multimeters to debug signal integrity and
+        communication protocols.
+      </li>
+    </ul>
+  </body>
+</html>
