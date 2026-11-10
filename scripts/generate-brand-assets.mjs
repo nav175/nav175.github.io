@@ -83,15 +83,22 @@ const edgeGradient = (id) => `<linearGradient id="${id}" x1="0.28" y1="-0.1" x2=
     <stop offset="1" stop-color="#fff" stop-opacity="0.22"/>
   </linearGradient>`
 
-/** Rounded tile with transparent corners, for favicons and "any" purpose icons. */
-function tileIcon(size) {
-  const stroke = Math.max(1, size / 40)
+/**
+ * Rounded tile. Favicons use a light face: Safari ignores SVG and PNG-in-ICO,
+ * and a near-black tile disappears on a dark tab bar. App icons stay dark.
+ */
+function tileIcon(size, tone = 'dark') {
+  const stroke = Math.max(1, size / 32)
   const inset = stroke / 2
-  const radius = size * (9 / 32) - inset
+  const radius = size * (8 / 32)
+  const face = tone === 'light' ? '#f4f5f7' : color.graphite
+  const ink = tone === 'light' ? '#0c0e12' : color.mist
+  const edge = tone === 'light' ? 'rgb(12 14 18 / 0.18)' : 'url(#edge)'
+  const defs = tone === 'light' ? '' : `<defs>${edgeGradient('edge')}</defs>`
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-  <defs>${edgeGradient('edge')}</defs>
-  <rect x="${trim(inset)}" y="${trim(inset)}" width="${trim(size - stroke)}" height="${trim(size - stroke)}" rx="${trim(radius)}" fill="${color.graphite}" stroke="url(#edge)" stroke-width="${trim(stroke)}"/>
-  <path fill="${color.mist}" d="${monogramLetters(size, size * 0.47)}"/>
+  ${defs}
+  <rect x="${trim(inset)}" y="${trim(inset)}" width="${trim(size - stroke)}" height="${trim(size - stroke)}" rx="${trim(radius)}" fill="${face}" stroke="${edge}" stroke-width="${trim(stroke)}"/>
+  <path fill="${ink}" d="${monogramLetters(size, size * 0.52)}"/>
 </svg>
 `
 }
@@ -242,9 +249,13 @@ function ico(images) {
   return Buffer.concat([header, ...images.map(({ data }) => data)])
 }
 
+const faviconPng = (size) => png(tileIcon(size, 'light'), size)
+
 const outputs = {
-  'favicon.svg': tileIcon(32),
-  'favicon.ico': ico([16, 32, 48].map((size) => ({ size, data: png(tileIcon(size), size) }))),
+  'favicon.svg': tileIcon(32, 'light'),
+  'favicon-16x16.png': faviconPng(16),
+  'favicon-32x32.png': faviconPng(32),
+  'favicon.ico': ico([16, 32, 48].map((size) => ({ size, data: faviconPng(size) }))),
   'apple-touch-icon.png': png(bleedIcon(180, 0.42), 180),
   'icon-192.png': png(tileIcon(192), 192),
   'icon-512.png': png(tileIcon(512), 512),
